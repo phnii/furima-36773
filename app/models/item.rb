@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :ship_from
   belongs_to :shipping_fee
+  has_one_attached :image
 
   with_options presence: true do
     validates :name
