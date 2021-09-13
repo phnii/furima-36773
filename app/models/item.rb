@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :ship_from
   belongs_to :shipping_fee
+  belongs_to :shipping_days
+  belongs_to :user
   has_one_attached :image
 
   with_options presence: true do
@@ -17,6 +19,7 @@ class Item < ApplicationRecord
       validates :condition_id
       validates :shipping_fee_id
       validates :ship_from_id
+      validates :shipping_days_id
     end
   end
 end
