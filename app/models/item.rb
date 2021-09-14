@@ -9,10 +9,9 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :explanation
-    validates :shipping_days
-    validates :price
     validates :user
     with_options numericality: { other_than: 1, message: "can't be blank"} do
       validates :category_id
@@ -21,5 +20,6 @@ class Item < ApplicationRecord
       validates :ship_from_id
       validates :shipping_days_id
     end
+    validates :price
   end
 end
