@@ -57,10 +57,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping days can't be blank")
       end
-      it 'priceが空では投稿できない' do
-        @item.price = ''
+      it 'categoryが---では投稿できない' do
+        @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it 'conditionが---では投稿できない' do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'shipping_feeが---では投稿できない' do
+        @item.shipping_fee_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
+      end
+      it 'ship_fromが---では投稿できない' do
+        @item.ship_from_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Ship from can't be blank")
+      end
+      it 'shipping_daysが---では投稿できない' do
+        @item.shipping_days_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
       end
       it 'nameが41字以上では投稿できない' do
         @item.name = 'a' * 41
@@ -72,6 +92,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Explanation is too long (maximum is 1000 characters)')
       end
+      it 'priceが空では投稿できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'priceに半角数字以外を含むと投稿できない' do
+        @item.price = '300A'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
       it 'priceが299以下では投稿できない' do
         @item.price = 299
         @item.valid?
@@ -81,6 +111,11 @@ RSpec.describe Item, type: :model do
         @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+      it 'userが紐づいていないと登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
