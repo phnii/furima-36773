@@ -61,19 +61,19 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが9桁以下だと保存できない' do
-        @purchase_address.phone_number ="123456789"
+        @purchase_address.phone_number = '123456789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが12桁異常だと保存できない' do
         @purchase_address.phone_number = '123456789012'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberに英数字以外が含まれている場合は保存できない' do
         @purchase_address.phone_number = '0801234123あ'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'tokenが空だと保存できない' do
         @purchase_address.token = ''

@@ -9,7 +9,6 @@ FactoryBot.define do
     shipping_days_id  { 2 }
     price             { 5000 }
 
-
     after(:build) do |item|
       item.image.attach(io: File.open('public/apple-touch-icon.png'), filename: 'apple-touch-icon.png')
     end
