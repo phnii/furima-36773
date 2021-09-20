@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../item_calc")
+require("../card")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
