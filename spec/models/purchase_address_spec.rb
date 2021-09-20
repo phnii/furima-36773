@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   describe '新規購入' do
     before do
-      @purchase_address = FactoryBot.build(:purchase_address)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item, user_id: user.id)
+      @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
+      sleep 1
     end
 
     context '内容に問題がない場合' do
@@ -57,10 +60,35 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberが9桁以下だと保存できない' do
+        @purchase_address.phone_number ="123456789"
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberが12桁異常だと保存できない' do
+        @purchase_address.phone_number = '123456789012'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberに英数字以外が含まれている場合は保存できない' do
+        @purchase_address.phone_number = '0801234123あ'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
       it 'tokenが空だと保存できない' do
         @purchase_address.token = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では保存できない' do
+        @purchase_address.user_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では保存できない' do
+        @purchase_address.item_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
