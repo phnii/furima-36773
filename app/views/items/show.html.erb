@@ -28,7 +28,7 @@
       <%= link_to "削除", item_path(@item), method: :delete, class:"item-destroy" %>
     <% end %>
     <% if user_signed_in? && current_user.id != @item.user.id && !Purchase.exists?(item_id: @item.id) %>
-      <%= link_to "購入画面に進む", new_item_purchase_path(@item) ,class:"item-red-btn"%>
+      <%= link_to "購入画面に進む", item_purchases_path(@item) ,class:"item-red-btn"%>
     <% end %>
 
 
