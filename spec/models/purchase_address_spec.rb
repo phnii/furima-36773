@@ -23,72 +23,72 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'postal_codeが空だと保存できない' do
         @purchase_address.postal_code = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("郵便番号を入力してください")
       end
       it 'postal_codeにハイフン(-)がないと保存できない' do
         @purchase_address.postal_code = '1234567'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@purchase_address.errors.full_messages).to include('郵便番号 を入力してください。ハイフンを含んでください')
       end
       it 'prefecture_idが空だと保存できない' do
         @purchase_address.prefecture_id = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("都道府県を入力してください")
       end
       it 'prefecture_idが---だと保存できない' do
         @purchase_address.prefecture_id = 1
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("都道府県を入力してください")
       end
       it 'cityが空だと保存できない' do
         @purchase_address.city = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("City can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("市町村を入力してください")
       end
       it 'street_addressが空だと保存できない' do
         @purchase_address.street_address = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Street address can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("番地を入力してください")
       end
       it 'phone_numberが空だと保存できない' do
         @purchase_address.phone_number = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("電話番号を入力してください")
       end
       it 'phone_numberにハイフンを含むと保存できない' do
         @purchase_address.phone_number = '080-1111-2222'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は不正な値です')
       end
       it 'phone_numberが9桁以下だと保存できない' do
         @purchase_address.phone_number = '123456789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は不正な値です')
       end
       it 'phone_numberが12桁異常だと保存できない' do
         @purchase_address.phone_number = '123456789012'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は不正な値です')
       end
       it 'phone_numberに英数字以外が含まれている場合は保存できない' do
         @purchase_address.phone_number = '0801234123あ'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は不正な値です')
       end
       it 'tokenが空だと保存できない' do
         @purchase_address.token = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("カード情報を入力してください")
       end
       it 'user_idが空では保存できない' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("Userを入力してください")
       end
       it 'item_idが空では保存できない' do
         @purchase_address.item_id = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("Itemを入力してください")
       end
     end
   end

@@ -13,7 +13,7 @@ class Item < ApplicationRecord
     validates :image
     validates :name, length: { maximum: 40 }
     validates :explanation, length: { maximum: 1000 }
-    with_options numericality: { other_than: 1, message: "can't be blank" } do
+    with_options numericality: { other_than: 1, message: 'が不正な値です'} do
       validates :category_id
       validates :condition_id
       validates :shipping_fee_id
